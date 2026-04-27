@@ -1,3 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+
+@theme{
+  --color-juego-primario: #22c55e;       /* Verde vibrante (Emerald 500) */
+  --color-juego-oscuro: #14532d;         /* Verde bosque para texto fuerte */
+  --color-juego-suave: #dcfce7;          /* Verde muy clarito para hovers o fondos de cards */
+  --color-juego-acento: #84cc16;         /* Verde lima para destacar */
+  --color-juego-texto: #0f172a;          /* Azul muy oscuro para que el texto sea legible */
+}
