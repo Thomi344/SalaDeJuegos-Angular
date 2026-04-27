@@ -1,0 +1,25 @@
+<nav class="bg-white border-b-4 border-juego-primario px-8 py-4 flex justify-between items-center shadow-sm sticky top-0 z-50">
+    
+    <div class="flex items-center gap-2 cursor-pointer" routerLink="/home">
+        <div class="w-10 h-10 bg-juego-primario rounded-lg flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(20,83,45,1)]">
+            <span class="text-white font-black text-2xl">Th</span>
+        </div>
+        <h1 class="text-juego-oscuro font-black text-2xl tracking-tighter ml-2">
+            SALA<span class="text-juego-primario">DE</span>JUEGOS
+        </h1>
+    </div>
+
+    <div class="flex items-center gap-8">
+        <a routerLink="/home" 
+        routerLinkActive="text-juego-primario border-b-2 border-juego-primario" 
+        class="text-juego-texto font-bold text-lg hover:text-juego-primario transition-all duration-300 py-1">
+        Inicio
+        </a>
+
+        <a routerLink="/quiensoy" 
+        routerLinkActive="bg-juego-primario text-white shadow-[4px_4px_0px_0px_rgba(20,83,45,1)]"
+        class="text-juego-texto font-bold text-lg border-2 border-juego-primario px-6 py-2 rounded-xl hover:bg-juego-oscuro hover:text-white transition-all duration-300">
+        Quién Soy
+        </a>
+    </div>
+</nav>

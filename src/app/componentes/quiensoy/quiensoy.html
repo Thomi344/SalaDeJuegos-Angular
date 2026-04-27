@@ -1,7 +1,6 @@
 <div class="min-h-screen bg-juego-base flex items-stretch overflow-hidden">
-    
     <aside class="w-[35%] bg-juego-suave flex flex-col items-center justify-start p-12 border-r-4 border-juego-primario">
-        
+        @if (DatosAlumno){
         <div class="relative group">
             <div class="absolute -inset-1 bg-juego-primario rounded-2xl blur opacity-25"></div>
             <img [src]="DatosAlumno?.avatar_url" class="relative w-72 h-72 rounded-2xl border-4 border-juego-primario shadow-2xl object-cover mb-8" alt="Foto de perfil">
@@ -14,12 +13,19 @@
         <p class="bg-juego-primario text-white px-6 py-2 rounded-full font-mono text-xl shadow-lg">
             Usuario: {{ DatosAlumno?.login }}
         </p>
+        
         <div class="mt-10 border-10 border-juego-primario rounded-lg p-6 bg-white shadow-lg  ">
             <p class="text-juego-texto text-xl leading-relaxed text-justify">Me llamo Dylan Thomas Valenzuela, actualmente me encuentro cursando el cuarto cuatrimestre de la Tecnicatura. Ademas curso la Licenciatura en Informatica en la Universidad nacional de Quilmes. Me encanta el rubro IT y busco aprender lo mas que pueda sobre las tecnologias actuales. <br>Me encuentro en la busqueda de mi primera chamba...</p>
         </div>
-        <div class="mt-auto pt-10">
+        <div class="mt-10 pt-10">
             <p class="text-juego-oscuro/50 font-bold tracking-[0.2em] uppercase text-xs italic">Espero aprobar porfavor T_T</p>
         </div>
+        }@else {
+        <div class="flex flex-col items-center gap-4">
+            <div class="w-72 h-72 bg-slate-200 animate-pulse rounded-2xl"></div>
+            <p class="text-juego-primario font-bold animate-bounce">Conectando con GitHub...</p>
+        </div>            
+        }
     </aside>
 
     <main class="w-[65%] p-16 flex flex-col justify-center bg-white">
