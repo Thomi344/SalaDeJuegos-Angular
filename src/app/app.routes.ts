@@ -19,12 +19,12 @@ export const routes: Routes = [
     },
     {
         path: '',
-        redirectTo: 'home',
+        loadComponent: () => import('./componentes/home/home').then(m=>m.Home),
         pathMatch: 'full'
     },
     {
         path: '**',
-        redirectTo: 'home'
+        loadComponent: () => import('./componentes/home/home').then(m=>m.Home)
     }
 
 ];
