@@ -1,25 +1,55 @@
 <nav class="bg-white border-b-4 border-juego-primario px-8 py-4 flex justify-between items-center shadow-sm sticky top-0 z-50">
     
+    <!-- Logo -->
     <div class="flex items-center gap-2 cursor-pointer" routerLink="/home">
         <div class="w-10 h-10 bg-juego-primario rounded-lg flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(20,83,45,1)]">
-            <span class="text-white font-black text-2xl">Th</span>
+        <span class="text-white font-black text-2xl">Th</span>
         </div>
-        <h1 class="text-juego-oscuro font-black text-2xl tracking-tighter ml-2">
-            SALA<span class="text-juego-primario">DE</span>JUEGOS
+        <h1 class="text-juego-oscuro font-black text-2xl tracking-tighter ml-2 hidden sm:block">
+        SALA<span class="text-juego-primario">DE</span>JUEGOS
         </h1>
     </div>
 
-    <div class="flex items-center gap-8">
+    <!-- Links y Autenticación -->
+    <div class="flex items-center gap-6 md:gap-10">
+        
+        <!-- Links Centrales -->
+        <div class="hidden md:flex items-center gap-8 border-r-2 border-gray-200 pr-8">
         <a routerLink="/home" 
-        routerLinkActive="text-juego-primario border-b-2 border-juego-primario" 
-        class="text-juego-texto font-bold text-lg hover:text-juego-primario transition-all duration-300 py-1">
-        Inicio
+            routerLinkActive="text-juego-primario border-b-2 border-juego-primario" 
+            [routerLinkActiveOptions]="{exact: true}"
+            class="text-juego-texto font-bold text-lg hover:text-juego-primario transition-all duration-300 py-1">
+            Juegos
         </a>
 
         <a routerLink="/quiensoy" 
-        routerLinkActive="bg-juego-primario text-white shadow-[4px_4px_0px_0px_rgba(20,83,45,1)]"
-        class="text-juego-texto font-bold text-lg border-2 border-juego-primario px-6 py-2 rounded-xl hover:bg-juego-oscuro hover:text-white transition-all duration-300">
-        Quién Soy
+            routerLinkActive="bg-juego-primario text-white shadow-[4px_4px_0px_0px_rgba(20,83,45,1)] border-transparent"
+            class="text-juego-texto font-bold text-lg border-2 border-juego-primario px-6 py-2 rounded-xl hover:bg-juego-oscuro hover:text-white hover:border-juego-oscuro transition-all duration-300">
+            Quién Soy
         </a>
+        </div>
+
+        <!-- Lógica de Usuario -->
+        @if (!usuarioLogueado) {
+        <div class="flex items-center gap-4">
+            <a routerLink="/login" class="text-juego-texto font-bold text-sm hover:text-juego-primario transition-colors uppercase">
+            Ingresar
+            </a>
+            <a routerLink="/registro" class="bg-juego-primario hover:bg-juego-oscuro text-white font-black px-5 py-2 rounded-xl shadow-[4px_4px_0px_0px_rgba(20,83,45,1)] active:translate-y-1 active:shadow-none transition-all uppercase text-sm">
+            Registrarse
+            </a>
+        </div>
+        } @else {
+        <div class="flex items-center gap-4">
+            <div class="text-right hidden sm:block">
+            <p class="text-[10px] font-bold text-juego-primario uppercase tracking-widest">Jugador en línea</p>
+            <p class="text-sm font-black text-juego-oscuro">{{ correoUsuario }}</p>
+            </div>
+            <button (click)="cerrarSesion()" class="border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-black px-4 py-2 rounded-xl shadow-[4px_4px_0px_0px_rgba(239,68,68,1)] active:translate-y-1 active:shadow-none transition-all uppercase text-xs">
+            Salir
+            </button>
+        </div>
+        }
+
     </div>
 </nav>

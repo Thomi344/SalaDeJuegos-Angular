@@ -1,1 +1,125 @@
-<p>login works!</p>
+<div class="min-h-[calc(100vh-80px)] flex items-center justify-center bg-[#1a1a1a] p-4 relative">
+    
+    <div class="w-full max-w-md bg-[#dcfce7] rounded-3xl shadow-2xl overflow-hidden border-b-8 border-[#22c55e]">
+        
+        <!-- Cabecera -->
+        <div class="bg-[#22c55e] p-10 text-center">
+        <h2 class="text-4xl font-black text-[#0f172a] tracking-tighter uppercase italic">INGRESAR</h2>
+        <p class="text-[#14532d] font-bold text-sm mt-2 uppercase tracking-widest">Bienvenido de vuelta</p>
+        </div>
+
+        <!-- Formulario -->
+        <form [formGroup]="miFormulario" (ngSubmit)="enviarForm()" class="p-8 md:p-12 space-y-6">
+        
+        <!-- ============================================== -->
+        <!-- BOTONES DE ACCESO RÁPIDO       -->
+        <!-- ============================================== -->
+        <div class="bg-white/50 border-2 border-[#22c55e]/20 rounded-2xl p-4 mb-6">
+            <p class="text-center text-[10px] font-black text-[#14532d] uppercase tracking-widest mb-3">
+            Accesos Rápidos (Testing)
+            </p>
+            <div class="flex justify-center gap-2">
+            <!-- Botón 1 -->
+            <button type="button" (click)="loginRapido('thomasdylan05@hotmail.com', 'thomas')" 
+                    [disabled]="cargando"
+                    class="flex-1 bg-[#14532d] hover:bg-[#22c55e] text-[#dcfce7] hover:text-[#0f172a] font-bold py-2 rounded-xl text-xs transition-colors disabled:opacity-50">
+                Jugador 1
+            </button>
+            <!-- Botón 2 -->
+            <button type="button" (click)="loginRapido('tester2@sala.com', '123456')"
+                    [disabled]="cargando"
+                    class="flex-1 bg-[#14532d] hover:bg-[#22c55e] text-[#dcfce7] hover:text-[#0f172a] font-bold py-2 rounded-xl text-xs transition-colors disabled:opacity-50">
+                Jugador 2
+            </button>
+            <!-- Botón 3 -->
+            <button type="button" (click)="loginRapido('profe@sala.com', '123456')"
+                    [disabled]="cargando"
+                    class="flex-1 bg-[#14532d] hover:bg-[#22c55e] text-[#dcfce7] hover:text-[#0f172a] font-bold py-2 rounded-xl text-xs transition-colors disabled:opacity-50">
+                Jugador 3
+            </button>
+            </div>
+        </div>
+        <!-- ============================================== -->
+
+        <!-- Mail -->
+        <div class="flex flex-col">
+            <label class="text-xs font-black text-[#14532d] uppercase mb-2 ml-1">Email de acceso</label>
+            <input type="email" formControlName="mail"
+                class="bg-white border-2 border-[#22c55e]/20 rounded-2xl px-6 py-4 text-lg text-[#0f172a] focus:outline-none focus:border-[#84cc16] transition-all shadow-sm"
+                placeholder="jugador@sala.com">
+            
+            @if (mail?.touched && mail?.errors?.['required']) {
+            <span class="text-red-600 text-[10px] font-bold mt-1 ml-2">El email es obligatorio</span>
+            }
+        </div>
+
+        <!-- Clave -->
+        <div class="flex flex-col">
+            <label class="text-xs font-black text-[#14532d] uppercase mb-2 ml-1">Contraseña</label>
+            <input type="password" formControlName="clave"
+                class="bg-white border-2 border-[#22c55e]/20 rounded-2xl px-6 py-4 text-lg text-[#0f172a] focus:outline-none focus:border-[#84cc16] transition-all shadow-sm"
+                placeholder="••••••••">
+                
+            @if (clave?.touched && clave?.errors?.['required']) {
+            <span class="text-red-600 text-[10px] font-bold mt-1 ml-2">La contraseña es obligatoria</span>
+            }
+        </div>
+
+        <!-- Botones y Links -->
+        <div class="mt-10 flex flex-col items-center">
+            <!-- Botón Entrar -->
+            <button type="submit" 
+                    [disabled]="cargando"
+                    class="w-full bg-[#22c55e] disabled:bg-[#22c55e]/50 hover:bg-[#84cc16] text-[#0f172a] font-black py-5 rounded-2xl shadow-[0_6px_0_rgba(20,83,45,1)] disabled:shadow-none active:translate-y-1 active:shadow-none transition-all uppercase tracking-[0.2em] text-lg cursor-pointer disabled:cursor-wait">
+            {{ cargando ? 'CONECTANDO...' : 'ENTRAR A LA SALA' }}
+            </button>
+            
+            <!-- Link de Registro -->
+            <div class="mt-8 text-center border-t border-[#14532d]/10 pt-6 w-full">
+            <span class="text-[#14532d] text-sm font-medium">¿Sos un jugador nuevo?</span>
+            <a routerLink="/registro" class="text-[#0f172a] font-black text-sm hover:text-[#22c55e] hover:underline transition-colors ml-1 uppercase">
+                Crear cuenta
+            </a>
+            </div>
+        </div>
+        </form>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- MODAL DE NOTIFICACIÓN                          -->
+    <!-- ============================================== -->
+    @if (mostrarModal) {
+        <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-[#0f172a]/80 backdrop-blur-sm" (click)="cerrarModal()"></div>
+
+        <div class="relative w-full max-w-sm bg-[#dcfce7] rounded-3xl border-4 shadow-2xl transform transition-all"
+            [ngClass]="esError ? 'border-red-500' : 'border-[#22c55e]'">
+            
+            <div class="p-8 text-center">
+            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full mb-4"
+                [ngClass]="esError ? 'bg-red-100 text-red-600' : 'bg-green-100 text-[#22c55e]'">
+                @if (esError) {
+                <span class="text-3xl font-black">!</span>
+                } @else {
+                <span class="text-3xl font-black">✓</span>
+                }
+            </div>
+
+            <h3 class="text-xl font-black text-[#0f172a] uppercase italic mb-2">
+                {{ esError ? 'Acceso Denegado' : '¡Login Exitoso!' }}
+            </h3>
+            
+            <p class="text-[#14532d] text-sm font-bold leading-relaxed mb-8">
+                {{ mensajeModal }}
+            </p>
+
+            <button (click)="cerrarModal()"
+                    [ngClass]="esError ? 'bg-red-500 hover:bg-red-400 shadow-[0_4px_0_#991b1b] text-white' : 'bg-[#22c55e] hover:bg-[#84cc16] shadow-[0_4px_0_#14532d] text-[#0f172a]'"
+                    class="w-full font-black py-4 rounded-xl active:translate-y-1 active:shadow-none transition-all uppercase tracking-widest text-xs">
+                Continuar
+            </button>
+            </div>
+        </div>
+        </div>
+    }
+</div>

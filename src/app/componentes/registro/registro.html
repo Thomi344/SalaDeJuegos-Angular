@@ -1,1 +1,149 @@
-<p>registro works!</p>
+<div class="min-h-[calc(100vh-80px)] flex items-center justify-center bg-[#1a1a1a] p-4 relative">
+    
+    <!-- CONTENEDOR PRINCIPAL DEL FORMULARIO -->
+    <div class="w-full max-w-5xl bg-[#dcfce7] rounded-3xl shadow-2xl overflow-hidden border-b-8 border-[#22c55e]">
+        
+        <!-- Cabecera -->
+        <div class="bg-[#22c55e] p-8 text-center">
+        <h2 class="text-4xl font-black text-[#0f172a] tracking-tighter uppercase italic">FICHA DE INGRESO</h2>
+        <p class="text-[#14532d] font-bold text-sm mt-2 uppercase">Validá tu perfil para ingresar a la sala</p>
+        </div>
+
+        <!-- Formulario Reactive -->
+        <form [formGroup]="miFormulario" (ngSubmit)="enviarForm()" class="p-10 md:p-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+            
+            <!-- Nombre -->
+            <div class="flex flex-col">
+            <label class="text-xs font-black text-[#14532d] uppercase mb-1 ml-1">Nombre</label>
+            <input type="text" formControlName="nombre"
+                    class="bg-white border-2 border-[#22c55e]/20 rounded-2xl px-6 py-3 text-[#0f172a] focus:outline-none focus:border-[#84cc16] transition-all">
+            @if (nombre?.invalid && nombre?.touched) {
+                <span class="text-red-600 text-[10px] font-bold mt-1 ml-2">Campo requerido (Solo letras)</span>
+            }
+            </div>
+
+            <!-- Apellido -->
+            <div class="flex flex-col">
+            <label class="text-xs font-black text-[#14532d] uppercase mb-1 ml-1">Apellido</label>
+            <input type="text" formControlName="apellido"
+                    class="bg-white border-2 border-[#22c55e]/20 rounded-2xl px-6 py-3 text-[#0f172a] focus:outline-none focus:border-[#84cc16] transition-all">
+            @if (apellido?.invalid && apellido?.touched) {
+                <span class="text-red-600 text-[10px] font-bold mt-1 ml-2">El apellido es obligatorio</span>
+            }
+            </div>
+
+            <!-- Edad -->
+            <div class="flex flex-col">
+            <label class="text-xs font-black text-[#14532d] uppercase mb-1 ml-1">Edad (Min 18)</label>
+            <input type="number" formControlName="edad"
+                    class="bg-white border-2 border-[#22c55e]/20 rounded-2xl px-6 py-3 text-[#0f172a] focus:outline-none focus:border-[#84cc16] transition-all">
+            @if (edad?.invalid && edad?.touched) {
+                <span class="text-red-600 text-[10px] font-bold mt-1 ml-2">Debes ser mayor de 18 años</span>
+            }
+            </div>
+
+            <!-- Mail -->
+            <div class="flex flex-col">
+            <label class="text-xs font-black text-[#14532d] uppercase mb-1 ml-1">Email de acceso</label>
+            <input type="email" formControlName="mail"
+                    class="bg-white border-2 border-[#22c55e]/20 rounded-2xl px-6 py-3 text-[#0f172a] focus:outline-none focus:border-[#84cc16] transition-all">
+            
+            @if (mail?.touched && mail?.errors?.['required']) {
+                <span class="text-red-600 text-[10px] font-bold mt-1 ml-2">El email es obligatorio</span>
+            }
+            @if (mail?.touched && mail?.errors?.['email']) {
+                <span class="text-red-600 text-[10px] font-bold mt-1 ml-2">Formato de correo inválido</span>
+            }
+            </div>
+
+            <!-- Clave -->
+            <div class="flex flex-col">
+            <label class="text-xs font-black text-[#14532d] uppercase mb-1 ml-1">Contraseña</label>
+            <input type="password" formControlName="clave"
+                    class="bg-white border-2 border-[#22c55e]/20 rounded-2xl px-6 py-3 text-[#0f172a] focus:outline-none focus:border-[#84cc16] transition-all"
+                    placeholder="Mínimo 6 caracteres">
+            @if (clave?.invalid && clave?.touched) {
+                <span class="text-red-600 text-[10px] font-bold mt-1 ml-2">Mínimo 6 caracteres requeridos</span>
+            }
+            </div>
+
+            <!-- Repite Clave -->
+            <div class="flex flex-col">
+            <label class="text-xs font-black text-[#14532d] uppercase mb-1 ml-1">Confirmar Contraseña</label>
+            <input type="password" formControlName="repiteClave"
+                    class="bg-white border-2 border-[#22c55e]/20 rounded-2xl px-6 py-3 text-[#0f172a] focus:outline-none focus:border-[#84cc16] transition-all">
+            
+            <!-- ESTE ES EL MENSAJE ROJO DE CONTRASEÑAS -->
+            @if (miFormulario.hasError('clavesNoIguales') && repiteClave?.dirty) {
+                <span class="text-red-600 text-[10px] font-bold mt-1 ml-2">LAS CONTRASEÑAS DEBEN SER IGUALES</span>
+            }
+            </div>
+        </div>
+
+        <!-- Botones y Links -->
+        <div class="mt-12 flex flex-col items-center">
+            <!-- Botón Enviar -->
+            <button type="submit" 
+                    [disabled]="miFormulario.invalid || cargando"
+                    class="w-full max-w-md bg-[#22c55e] disabled:bg-gray-400 disabled:shadow-none hover:bg-[#84cc16] text-[#0f172a] font-black py-5 rounded-2xl shadow-[0_6px_0_rgba(20,83,45,1)] active:translate-y-1 active:shadow-none transition-all uppercase tracking-[0.1em] text-lg cursor-pointer disabled:cursor-not-allowed">
+            <!-- Cambia el texto mágicamente si está cargando -->
+            {{ cargando ? 'REGISTRANDO...' : 'CREAR USUARIO' }}
+            </button>
+            
+            <!-- Link de Login y Limpiar -->
+            <div class="mt-6 flex flex-col items-center gap-2">
+            <div class="text-center">
+                <span class="text-[#14532d] text-sm font-medium">¿Ya tenés cuenta?</span>
+                <a routerLink="/login" class="text-[#0f172a] font-black text-sm hover:text-[#22c55e] hover:underline transition-colors ml-1">
+                Iniciá sesión acá
+                </a>
+            </div>
+            
+            <button type="button" (click)="miFormulario.reset()" class="text-[#14532d] text-xs font-bold hover:underline uppercase opacity-60 mt-4 transition-opacity hover:opacity-100">
+                Limpiar todos los campos
+            </button>
+            </div>
+        </div>
+        </form>
+    </div>
+
+    <!-- MODAL DE NOTIFICACIÓN DINÁMICO                 -->
+    @if (mostrarModal) {
+        <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <!-- Fondo oscuro desenfocado -->
+        <div class="absolute inset-0 bg-[#0f172a]/80 backdrop-blur-sm" (click)="cerrarModal()"></div>
+
+        <!-- Caja del Modal -->
+        <div class="relative w-full max-w-sm bg-[#dcfce7] rounded-3xl border-4 shadow-2xl transform transition-all"
+            [ngClass]="esError ? 'border-red-500' : 'border-[#22c55e]'">
+            
+            <div class="p-8 text-center">
+            <!-- Icono Dinámico -->
+            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full mb-4"
+                [ngClass]="esError ? 'bg-red-100 text-red-600' : 'bg-green-100 text-[#22c55e]'">
+                @if (esError) {
+                <span class="text-3xl font-black">!</span>
+                } @else {
+                <span class="text-3xl font-black">✓</span>
+                }
+            </div>
+
+            <h3 class="text-xl font-black text-[#0f172a] uppercase italic mb-2">
+                {{ esError ? 'Error de Sistema' : '¡Misión Cumplida!' }}
+            </h3>
+            
+            <p class="text-[#14532d] text-sm font-bold leading-relaxed mb-8">
+                {{ mensajeModal }}
+            </p>
+
+            <button (click)="cerrarModal()"
+                    [ngClass]="esError ? 'bg-red-500 hover:bg-red-400 shadow-[0_4px_0_#991b1b] text-white' : 'bg-[#22c55e] hover:bg-[#84cc16] shadow-[0_4px_0_#14532d] text-[#0f172a]'"
+                    class="w-full font-black py-4 rounded-xl active:translate-y-1 active:shadow-none transition-all uppercase tracking-widest text-xs">
+                Cerrar
+            </button>
+            </div>
+        </div>
+        </div>
+    }
+</div>

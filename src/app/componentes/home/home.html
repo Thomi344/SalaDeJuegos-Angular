@@ -1,2 +1,100 @@
-<h1 class="text-9xl"><span class="text-blue-500">Boca lo </span><span class="text-yellow-500">mas grande </span><span class="text-blue-500">q hay </span></h1>
-<img src="https://i.pinimg.com/736x/bb/34/b3/bb34b382e60ffba0b2505dd5eea23ac9.jpg" alt="bocaa">
+<!-- Contenedor con fondo blanco y texto oscuro -->
+<div class="min-h-[calc(100vh-80px)] bg-white text-juego-texto font-sans selection:bg-juego-primario selection:text-white pb-16">
+    <main class="max-w-6xl mx-auto px-6 pt-12">        
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h2 class="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-juego-primario to-juego-acento italic tracking-tighter mb-4">
+                ELEGÍ TU DESAFÍO
+            </h2>
+            <p class="text-juego-oscuro font-black text-lg uppercase tracking-widest opacity-80">
+                Seleccioná un juego y demostrá tu habilidad
+            </p>
+        </div>
+        <!-- Grilla de Juegos (2 columnas) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+            <!-- JUEGO 1: AHORCADO -->
+            <a routerLink="/ahorcado" class="group bg-white rounded-3xl p-6 md:p-8 border-4 border-juego-suave hover:border-juego-primario transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(20,83,45,1)] flex flex-col sm:flex-row items-center sm:items-start gap-6 cursor-pointer">
+                
+                <!-- Icono -->
+                <div class="w-24 h-24 shrink-0 bg-juego-suave text-juego-oscuro rounded-2xl flex items-center justify-center text-5xl font-black group-hover:scale-110 group-hover:bg-juego-primario group-hover:text-white transition-all transform rotate-[-3deg]">
+                    A
+                </div>
+                
+                <!-- Texto -->
+                <div class="text-center sm:text-left flex-1">
+                    <h3 class="text-3xl font-black text-juego-oscuro uppercase italic tracking-tight mb-2 group-hover:text-juego-primario transition-colors">
+                        Ahorcado
+                    </h3>
+                    <p class="text-sm text-juego-texto font-medium leading-relaxed mb-5 opacity-80">
+                        Un clásico de clásicos. Tendrás que adivinar la palabra oculta letra por letra antes de que se complete el dibujo en pantalla. ¡Cuidado con equivocarte mucho o perderás la cabeza!
+                    </p>
+                    <span class="inline-block bg-juego-suave text-juego-oscuro font-black px-4 py-2 rounded-lg text-xs uppercase tracking-widest group-hover:bg-juego-primario group-hover:text-white transition-colors">
+                        Jugar ahora →
+                    </span>
+                </div>
+            </a>
+
+            <!-- JUEGO 2: MAYOR O MENOR -->
+            <a routerLink="/mayor-menor" class="group bg-white rounded-3xl p-6 md:p-8 border-4 border-juego-suave hover:border-juego-primario transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(20,83,45,1)] flex flex-col sm:flex-row items-center sm:items-start gap-6 cursor-pointer">
+                
+                <div class="w-24 h-24 shrink-0 bg-juego-suave text-juego-oscuro rounded-2xl flex items-center justify-center text-5xl font-black group-hover:scale-110 group-hover:bg-juego-primario group-hover:text-white transition-all transform rotate-[3deg]">
+                    +-
+                </div>
+                
+                <div class="text-center sm:text-left flex-1">
+                    <h3 class="text-3xl font-black text-juego-oscuro uppercase italic tracking-tight mb-2 group-hover:text-juego-primario transition-colors">
+                        Mayor o Menor
+                    </h3>
+                    <p class="text-sm text-juego-texto font-medium leading-relaxed mb-5 opacity-80">
+                        Se te mostrará una carta de la baraja en la mesa. Tu misión es predecir si la próxima carta que salga será de un valor más alto o más bajo. Armá tu racha de aciertos para sumar puntos.
+                    </p>
+                    <span class="inline-block bg-juego-suave text-juego-oscuro font-black px-4 py-2 rounded-lg text-xs uppercase tracking-widest group-hover:bg-juego-primario group-hover:text-white transition-colors">
+                        Jugar ahora →
+                    </span>
+                </div>
+            </a>
+
+            <!-- JUEGO 3: PREGUNTADOS -->
+            <a routerLink="/preguntados" class="group bg-white rounded-3xl p-6 md:p-8 border-4 border-juego-suave hover:border-juego-primario transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(20,83,45,1)] flex flex-col sm:flex-row items-center sm:items-start gap-6 cursor-pointer">
+                
+                <div class="w-24 h-24 shrink-0 bg-juego-suave text-juego-oscuro rounded-2xl flex items-center justify-center text-5xl font-black group-hover:scale-110 group-hover:bg-juego-primario group-hover:text-white transition-all transform rotate-[-3deg]">
+                    ?
+                </div>
+                
+                <div class="text-center sm:text-left flex-1">
+                    <h3 class="text-3xl font-black text-juego-oscuro uppercase italic tracking-tight mb-2 group-hover:text-juego-primario transition-colors">
+                        Preguntados
+                    </h3>
+                    <p class="text-sm text-juego-texto font-medium leading-relaxed mb-5 opacity-80">
+                        Poné a prueba tu conocimiento general. Respondé correctamente a diferentes preguntas generadas al azar e intentá no quedarte sin tiempo. ¡Demostrá que sos el que más sabe!
+                    </p>
+                    <span class="inline-block bg-juego-suave text-juego-oscuro font-black px-4 py-2 rounded-lg text-xs uppercase tracking-widest group-hover:bg-juego-primario group-hover:text-white transition-colors">
+                        Jugar ahora →
+                    </span>
+                </div>
+            </a>
+
+            <!-- JUEGO 4: JUEGO PROPIO -->
+            <a routerLink="/juego-propio" class="group bg-white rounded-3xl p-6 md:p-8 border-4 border-juego-suave hover:border-juego-acento transition-all duration-300 hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_rgba(132,204,22,1)] flex flex-col sm:flex-row items-center sm:items-start gap-6 cursor-pointer">
+                
+                <div class="w-24 h-24 shrink-0 bg-juego-suave text-juego-oscuro rounded-2xl flex items-center justify-center text-5xl font-black group-hover:scale-110 group-hover:bg-juego-acento group-hover:text-juego-texto transition-all transform rotate-[3deg]">
+                    ★
+                </div>
+                
+                <div class="text-center sm:text-left flex-1">
+                    <h3 class="text-3xl font-black text-juego-acento uppercase italic tracking-tight mb-2 group-hover:text-juego-oscuro transition-colors">
+                        Juego Sorpresa
+                    </h3>
+                    <p class="text-sm text-juego-texto font-medium leading-relaxed mb-5 opacity-80">
+                        La mecánica de este videojuego es sencilla: se presentan 4 logos, de los cuales 3 son incorrectos y 1 es el correcto. El jugador debe seleccionar cuidadosamente la opción correcta para ganar
+                    </p>
+                    <span class="inline-block bg-juego-suave text-juego-oscuro font-black px-4 py-2 rounded-lg text-xs uppercase tracking-widest group-hover:bg-juego-acento group-hover:text-juego-texto transition-colors">
+                        Jugar ahora →
+                    </span>
+                </div>
+            </a>
+
+        </div>
+    </main>
+</div>

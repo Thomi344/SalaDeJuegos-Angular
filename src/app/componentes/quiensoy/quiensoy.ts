@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { Github } from '../../servicios/github';
 import { OnInit } from '@angular/core';
 
@@ -13,7 +13,7 @@ import { OnInit } from '@angular/core';
 })
 export class Quiensoy implements OnInit {
 
-  DatosAlumno:any;
+  DatosAlumno = signal <any>(null);
 
   constructor(private github: Github){}
 
@@ -23,7 +23,7 @@ export class Quiensoy implements OnInit {
 
   obtenerDatosGithub(){
     this.github.obtenerDatosGithub().subscribe((data:any)=>{
-      this.DatosAlumno = data;
+      this.DatosAlumno.set(data);
     })
   }
 }

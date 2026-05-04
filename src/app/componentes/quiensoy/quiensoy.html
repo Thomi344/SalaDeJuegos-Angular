@@ -1,20 +1,21 @@
-<div class="min-h-screen bg-juego-base flex items-stretch overflow-hidden">
+<div class="min-h-screen bg-juego-base flex items-stretch overflow-hidden font-sans selection:bg-juego-primario selection:text-white">
+    
     <aside class="w-[35%] bg-juego-suave flex flex-col items-center justify-start p-12 border-r-4 border-juego-primario">
-        @if (DatosAlumno){
+        @if (DatosAlumno()){
         <div class="relative group">
             <div class="absolute -inset-1 bg-juego-primario rounded-2xl blur opacity-25"></div>
-            <img [src]="DatosAlumno?.avatar_url" class="relative w-72 h-72 rounded-2xl border-4 border-juego-primario shadow-2xl object-cover mb-8" alt="Foto de perfil">
+            <img [src]="DatosAlumno().avatar_url" class="relative w-72 h-72 rounded-2xl border-4 border-juego-primario shadow-2xl object-cover mb-8" alt="Foto de perfil">
         </div>
 
         <h2 class="text-juego-oscuro text-4xl font-black text-center mb-2 tracking-tight">
-            {{ DatosAlumno?.name}}
+            {{ DatosAlumno().name}}
         </h2>
 
         <p class="bg-juego-primario text-white px-6 py-2 rounded-full font-mono text-xl shadow-lg">
-            Usuario: {{ DatosAlumno?.login }}
+            Usuario: {{ DatosAlumno().login }}
         </p>
         
-        <div class="mt-10 border-10 border-juego-primario rounded-lg p-6 bg-white shadow-lg  ">
+        <div class="mt-10 border-10 border-juego-primario rounded-lg p-6 bg-white shadow-lg">
             <p class="text-juego-texto text-xl leading-relaxed text-justify">Me llamo Dylan Thomas Valenzuela, actualmente me encuentro cursando el cuarto cuatrimestre de la Tecnicatura. Ademas curso la Licenciatura en Informatica en la Universidad nacional de Quilmes. Me encanta el rubro IT y busco aprender lo mas que pueda sobre las tecnologias actuales. <br>Me encuentro en la busqueda de mi primera chamba...</p>
         </div>
         <div class="mt-10 pt-10">
@@ -38,6 +39,7 @@
                 <p class="text-juego-texto text-xl leading-relaxed text-justify">"¿Cual es el logo real?" porque es un juego de trivia visual que desafía a los jugadores a identificar correctamente los logos de marcas populares. Es un concepto divertido y educativo que pone a prueba el conocimiento de los jugadores sobre las marcas y su capacidad para distinguir entre versiones reales e imitaciones. Además, es un juego que se presta bien para una experiencia digital interactiva, lo que lo hace ideal para una sala de juegos en línea.</p>
             </div>
         </section>
+        
         <section class="mb-12">
             <h3 class="text-juego-primario text-5xl font-black mb-6 flex items-center gap-4">
                 <span class="bg-juego-primario text-white rounded-lg px-3 py-1 text-2xl">02</span>
