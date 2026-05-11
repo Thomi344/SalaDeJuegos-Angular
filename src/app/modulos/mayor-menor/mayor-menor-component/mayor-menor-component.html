@@ -1,0 +1,98 @@
+<div class="h-[calc(100vh-80px)] overflow-hidden bg-white text-juego-texto font-sans selection:bg-juego-primario selection:text-white flex flex-col items-center justify-center pt-2">
+    
+    <main class="w-full max-w-sm px-4 flex flex-col items-center">
+        
+        <div class="text-center mb-4">
+            <h2 class="text-4xl md:text-5xl font-black text-juego-oscuro italic tracking-tighter uppercase mb-1">
+                MAYOR O <span class="text-juego-primario">MENOR</span>
+            </h2>
+            
+            <div class="inline-block bg-juego-suave px-6 py-2 rounded-full border-2 border-juego-primario shadow-[4px_4px_0px_0px_rgba(20,83,45,1)]">
+                <p class="text-juego-oscuro font-black uppercase text-sm tracking-widest flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-juego-primario animate-pulse border border-juego-oscuro"></span>
+                    Racha: <span class="text-xl text-juego-primario">{{ puntaje() }}</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="relative w-40 h-64 mb-6 perspective-1000">
+                    
+            @if (cargando()) {
+                <div class="absolute inset-0 z-10 bg-juego-suave/80 rounded-xl border-4 border-juego-oscuro flex flex-col items-center justify-center backdrop-blur-sm shadow-[8px_8px_0px_0px_rgba(20,83,45,1)]">
+                    <div class="w-12 h-12 border-4 border-juego-oscuro/20 border-t-juego-primario rounded-full animate-spin mb-2"></div>
+                    <span class="text-[10px] font-black text-juego-oscuro uppercase tracking-tighter">Obteniendo Carta...</span>
+                </div>
+            }
+
+            @if (cartaActual()) {
+                <div class="w-full h-full rounded-xl drop-shadow-[8px_8px_0px_rgba(20,83,45,1)] transition-transform duration-300">
+                    
+                    <img [src]="cartaActual().image" 
+                        [alt]="cartaActual().value + ' of ' + cartaActual().suit" 
+                        class="w-full h-full object-contain object-center rounded-xl border-4 border-juego-oscuro bg-white">
+                </div>
+            } @else if (!cargando()) {
+                <div class="w-full h-full bg-juego-suave rounded-xl border-4 border-dashed border-juego-oscuro/30"></div>
+            }
+        </div>
+
+        <div class="w-full grid grid-cols-2 gap-4">
+            
+            <button (click)="adivinar('MAYOR')"
+                    [disabled]="cargando() || juegoTerminado()"
+                    class="bg-juego-primario hover:bg-juego-oscuro disabled:bg-gray-300 disabled:opacity-50 text-white font-black text-lg py-4 rounded-2xl border-2 border-juego-oscuro shadow-[6px_6px_0px_0px_rgba(20,83,45,1)] active:translate-y-1 active:shadow-none transition-all uppercase flex flex-col items-center justify-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 fill-juego-oscuro hover:fill-juego-primario" viewBox="0 0 24 24">
+                    <path d="M12 8l-6 6h12z"/>
+                </svg>
+                Mayor
+            </button>
+            
+            <button (click)="adivinar('MENOR')"
+                    [disabled]="cargando() || juegoTerminado()"
+                    class="bg-white hover:bg-gray-100 disabled:bg-gray-200 disabled:opacity-50 text-juego-oscuro font-black text-lg py-4 rounded-2xl border-4 border-juego-oscuro shadow-[6px_6px_0px_0px_rgba(20,83,45,1)] active:translate-y-1 active:shadow-none transition-all uppercase flex flex-col items-center justify-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 fill-juego-oscuro" viewBox="0 0 24 24">
+                    <path d="M12 16l6-6H6z"/>
+                </svg>
+                Menor
+            </button>
+        </div>
+
+        @if (juegoTerminado()) {
+            <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-juego-texto/90 backdrop-blur-sm">
+                <div class="bg-white max-w-sm w-full rounded-3xl p-8 text-center border-b-8 border-juego-primario shadow-2xl animate-in zoom-in duration-300">
+                    
+                    <div class="w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 bg-red-100 text-red-600 border-2 border-red-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 fill-red-800" viewBox="0 0 24 24">
+                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        </svg>
+                    </div>
+                    
+                    <h3 class="text-3xl font-black uppercase italic mb-2 text-red-600">¡Game Over!</h3>
+                    
+                    <p class="text-5xl font-black text-juego-primario tracking-tighter">{{ puntaje() }}</p>
+
+                    <p class="text-juego-texto font-bold mb-4">
+                        Apareció un: <span class="text-juego-oscuro text-xl uppercase block mt-1">
+                            {{ cartaActual()?.value }} de {{ cartaActual()?.suit }}
+                        </span>
+                    </p>
+
+                    <div class="bg-juego-suave rounded-xl p-4 mb-6 text-center border-2 border-juego-primario shadow-inner">
+                        <p class="text-xs uppercase tracking-widest text-juego-texto/60 font-black">Racha Final</p>
+                        <p class="text-5xl font-black text-juego-primario tracking-tighter">{{ puntaje() }}</p>
+                    </div>
+
+                    <button (click)="iniciarJuego()" 
+                            class="w-full mb-3 bg-juego-primario hover:bg-juego-oscuro text-white font-black py-3 rounded-xl shadow-[4px_4px_0px_0px_rgba(20,83,45,1)] active:translate-y-1 active:shadow-none transition-all uppercase tracking-widest text-sm">
+                        Intentar de nuevo
+                    </button>
+                    
+                    <button (click)="volverAlHome()" 
+                            class="w-full bg-white border-2 border-juego-oscuro text-juego-oscuro font-black py-2 rounded-xl hover:bg-gray-100 transition-all uppercase tracking-widest text-xs">
+                        Volver a la Sala
+                    </button>
+                </div>
+            </div>
+        }
+    </main>
+</div>

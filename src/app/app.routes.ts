@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-
+import { authGuardGuard } from './guards/auth-guard';
 export const routes: Routes = [
     {
         path: 'home',
@@ -16,6 +16,16 @@ export const routes: Routes = [
     {
         path: 'quiensoy',
         loadComponent: () => import('./componentes/quiensoy/quiensoy').then(m=>m.Quiensoy)
+    },
+    {
+        path: '',
+        loadChildren: () => import('./modulos/ahorcado/ahorcado-module').then(m=>m.AhorcadoModule),
+        canActivate: [authGuardGuard]
+    },
+    {
+        path: '',
+        loadChildren: () => import('./modulos/mayor-menor/mayor-menor-module').then(m=>m.MayorMenorModule),
+        canActivate: [authGuardGuard]
     },
     {
         path: '',

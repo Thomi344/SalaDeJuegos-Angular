@@ -1,0 +1,11 @@
+/* --- Estilos para la imagen de la carta --- */
+.object-contain {
+    object-fit: contain !important; /* Forza a que la imagen entera se muestre */
+}
+
+.object-center {
+    object-position: center !important; /* Centra la imagen dentro del contenedor */
+}
+.perspective-1000 {
+    perspective: 1000px;
+}

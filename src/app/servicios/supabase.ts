@@ -51,5 +51,28 @@ export class Supabase {
     obtenerDatosUsuario(){
         return this.clienteSupabase.from('usuariosTabla').select('*');
     }
+    
+    async guardarResultadoJuego(juego: string, gano: boolean, puntaje: number, tiempo: number, detalles: any) {
+    const { data: { session } } = await this.clienteSupabase.auth.getSession();
+    
+    if (session) {
+        const { error } = await this.clienteSupabase
+        .from('resultados_juegos')
+        .insert({
+            user_id: session.user.id,
+            email: session.user.email,
+            juego: juego,
+            gano: gano,
+            puntaje: puntaje,
+            tiempo_segundos: tiempo,
+            detalles: detalles
+        });
 
+        if (error) {
+        console.error("Error al guardar en Supabase:", error);
+        } else {
+        console.log(`¡Resultado de ${juego} guardado con éxito!`);
+        }
+    }
+    }
 }

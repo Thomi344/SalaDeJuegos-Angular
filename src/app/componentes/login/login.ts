@@ -47,7 +47,7 @@ export class Login implements OnInit {
       clave: clave
     });
     // ---- Disparar el envío ----
-    this.enviarForm();
+    //this.enviarForm();
   }
 
   async enviarForm() {
