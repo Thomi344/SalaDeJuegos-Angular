@@ -79,7 +79,7 @@ export class Chat implements OnInit, OnDestroy {
     try {
       await this.supabase.enviarMensajeChat(this.miUsuario, texto);
       //NO agregamos el mensaje a la lista acá manualmente. 
-      // Dejamos que la suscripción Realtime lo reciba y lo agregue. Así garantizamos sincronización real.
+      // Dejamos que la suscripción Realtime lo reciba y lo agregue. Así garantiza sincronización real.
     } catch (error) {
       console.error('Error al enviar:', error);
     }

@@ -21,7 +21,12 @@
                 class="text-juego-texto font-bold text-lg hover:text-juego-primario transition-all duration-300 py-1">
                 Juegos
             </a>
-
+            <a routerLink="/resultados" 
+                routerLinkActive="text-juego-primario border-b-2 border-juego-primario" 
+                [routerLinkActiveOptions]="{exact: true}"
+                class="text-juego-texto font-bold text-lg hover:text-juego-primario transition-all duration-300 py-1">
+                Resultados
+            </a>
             <a routerLink="/chat" 
                 routerLinkActive="text-juego-primario border-b-2 border-juego-primario" 
                 [routerLinkActiveOptions]="{exact: true}"

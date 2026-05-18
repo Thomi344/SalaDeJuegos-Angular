@@ -23,6 +23,10 @@ export const routes: Routes = [
         canActivate: [authGuardGuard]
     },
     {
+        path: 'resultados',
+        loadComponent: () => import('./componentes/resultados/resultados').then(m=>m.ResultadosComponent),
+    },
+    {
         path: '',
         loadChildren: () => import('./modulos/ahorcado/ahorcado-module').then(m=>m.AhorcadoModule),
         canActivate: [authGuardGuard]
@@ -35,6 +39,11 @@ export const routes: Routes = [
     {
         path: '',
         loadChildren: () => import('./modulos/preguntados/preguntados-module').then(m=>m.PreguntadosModule),
+        canActivate: [authGuardGuard]
+    },
+    {
+        path: '',
+        loadChildren: () => import('./modulos/logo-quiz/logo-quiz-module').then(m=>m.LogoQuizModule),
         canActivate: [authGuardGuard]
     },
     {

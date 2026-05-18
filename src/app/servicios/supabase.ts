@@ -74,7 +74,23 @@ export class Supabase {
         }
     }
     }
+    // --- Trae los datos de los resultados de la tabla ---
+    async obtenerTopResultados(nombreJuego: string) {
+    try {
+        const { data, error } = await this.clienteSupabase
+        .from('resultados_juegos')
+        .select('*')
+        .eq('juego', nombreJuego)
+        .order('puntaje', { ascending: false }) // Ordena de Mejor a Peor
+        .limit(10); // Traemos solo el Top 10 para no saturar la pantalla
 
+        if (error) throw error;
+        return data || [];
+    } catch (error) {
+        console.error(`Error al obtener resultados de ${nombreJuego}:`, error);
+        return [];
+    }
+    }
     // ========================= CHAT =========================
     // -- con el comando supabse_realtime se creo una tabla que con cada insert emite un evento que escuchamos en el frontend para mostrar los mensajes nuevos sin necesidad de refrescar la página ---
     // --- Trae los mensajes anteriores al entrar a la sala---
