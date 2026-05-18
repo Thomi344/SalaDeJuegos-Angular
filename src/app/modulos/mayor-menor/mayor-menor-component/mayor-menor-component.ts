@@ -1,4 +1,4 @@
-import { ChangeDetectorRef,signal, Component, NgZone, OnInit } from '@angular/core';
+import { signal, Component,  OnInit } from '@angular/core';
 import { Supabase } from '../../../servicios/supabase';
 import { Cartas } from '../../../servicios/cartas';
 import { Router } from '@angular/router';
@@ -13,6 +13,7 @@ export class MayorMenorComponent implements OnInit{
   deckId = signal<string>('');
   cartaActual = signal<any>(null);
   cargando = signal<boolean>(true);
+  cargandoImagen = signal<boolean>(true); // <-- AGREGADO: Signal para controlar la carga de píxeles
   puntaje = signal<number>(0);
   juegoTerminado = signal<boolean>(false);
 
@@ -40,6 +41,7 @@ export class MayorMenorComponent implements OnInit{
   // --- Configura el estado inicial, limpia el puntaje y pide el mazo al servicio ---
   async iniciarJuego() {
     this.cargando.set(true); 
+    this.cargandoImagen.set(true); // <-- AGREGADO
     this.juegoTerminado.set(false);
     this.puntaje.set(0);
     this.tiempoInicio = Date.now();
@@ -58,6 +60,7 @@ export class MayorMenorComponent implements OnInit{
   // --- Llama al servicio para obtener una carta y actualiza la señal de la carta actual ---
   async pedirNuevaCarta() {
     this.cargando.set(true);
+    this.cargandoImagen.set(true); // <-- AGREGADO
     try {
       const nuevaCarta = await this.cartasService.sacarCarta(this.deckId());
       this.cartaActual.set(nuevaCarta);

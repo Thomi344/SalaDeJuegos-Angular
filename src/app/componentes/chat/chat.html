@@ -1,0 +1,70 @@
+<div class="h-[calc(100vh-80px)] overflow-hidden bg-white text-juego-texto font-sans selection:bg-juego-primario selection:text-white flex flex-col items-center justify-center pt-2">
+    
+    <main class="w-full max-w-2xl px-4 flex flex-col h-full pb-4">
+        
+        <div class="flex items-center justify-between mb-4">
+            <button (click)="volverAlHome()" class="flex items-center justify-center w-10 h-10 bg-juego-suave rounded-full border-2 border-juego-oscuro hover:bg-gray-200 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-juego-oscuro" viewBox="0 0 24 24">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+            </button>
+            <h2 class="text-3xl font-black text-juego-oscuro italic tracking-tighter uppercase">
+                SALA DE <span class="text-juego-primario">CHAT</span>
+            </h2>
+            <div class="w-10"></div> </div>
+
+        <div class="flex-1 bg-juego-suave rounded-3xl border-4 border-juego-oscuro flex flex-col overflow-hidden shadow-[8px_8px_0px_0px_rgba(20,83,45,1)]">
+            
+            <div #contenedorMensajes class="flex-1 overflow-y-auto p-4 flex flex-col gap-3">
+                
+                @if (cargando()) {
+                    <div class="w-full h-full flex flex-col items-center justify-center opacity-50">
+                        <div class="w-10 h-10 border-4 border-juego-oscuro/20 border-t-juego-primario rounded-full animate-spin mb-2"></div>
+                        <span class="text-xs font-black uppercase tracking-widest text-juego-oscuro">Conectando...</span>
+                    </div>
+                }
+
+                @for (msg of mensajes(); track msg.id) {
+                    
+                    <div class="flex flex-col max-w-[80%]"
+                        [ngClass]="msg.usuario === miUsuario ? 'self-end items-end' : 'self-start items-start'">
+                        
+                        @if (msg.usuario !== miUsuario) {
+                            <span class="text-[10px] font-black uppercase tracking-widest text-juego-oscuro/60 ml-1 mb-1">
+                                {{ msg.usuario.split('@')[0] }}
+                            </span>
+                        }
+
+                        <div class="px-4 py-2 rounded-2xl border-2 border-juego-oscuro shadow-[2px_2px_0px_0px_rgba(20,83,45,1)] text-sm font-bold"
+                            [ngClass]="msg.usuario === miUsuario ? 
+                                        'bg-juego-primario text-white rounded-br-none' : 
+                                        'bg-white text-juego-oscuro rounded-bl-none'">
+                            {{ msg.mensaje }}
+                        </div>
+
+                        <span class="text-[9px] font-bold text-juego-oscuro/40 mt-1 mx-1">
+                            {{ msg.fecha | date:'HH:mm' }}
+                        </span>
+                    </div>
+                }
+            </div>
+
+            <div class="bg-white p-3 border-t-4 border-juego-oscuro flex gap-2">
+                <input type="text" 
+                    [value]="mensajeActual()" 
+                    (input)="actualizarMensaje($event)"
+                    (keydown.enter)="enviarMensaje()"
+                    placeholder="Escribí un mensaje..." 
+                    class="flex-1 bg-juego-suave rounded-xl px-4 py-3 border-2 border-juego-oscuro focus:outline-none focus:border-juego-primario text-juego-oscuro font-bold text-sm">
+                
+                <button (click)="enviarMensaje()" 
+                        [disabled]="!mensajeActual().trim()"
+                        class="bg-juego-primario hover:bg-juego-oscuro disabled:bg-gray-300 disabled:opacity-50 text-white rounded-xl px-4 flex items-center justify-center border-2 border-juego-oscuro shadow-[4px_4px_0px_0px_rgba(20,83,45,1)] active:translate-y-1 active:shadow-none transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </main>
+</div>

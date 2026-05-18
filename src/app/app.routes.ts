@@ -18,6 +18,11 @@ export const routes: Routes = [
         loadComponent: () => import('./componentes/quiensoy/quiensoy').then(m=>m.Quiensoy)
     },
     {
+        path: 'chat',
+        loadComponent: () => import('./componentes/chat/chat').then(m=>m.Chat),
+        canActivate: [authGuardGuard]
+    },
+    {
         path: '',
         loadChildren: () => import('./modulos/ahorcado/ahorcado-module').then(m=>m.AhorcadoModule),
         canActivate: [authGuardGuard]
@@ -25,6 +30,11 @@ export const routes: Routes = [
     {
         path: '',
         loadChildren: () => import('./modulos/mayor-menor/mayor-menor-module').then(m=>m.MayorMenorModule),
+        canActivate: [authGuardGuard]
+    },
+    {
+        path: '',
+        loadChildren: () => import('./modulos/preguntados/preguntados-module').then(m=>m.PreguntadosModule),
         canActivate: [authGuardGuard]
     },
     {

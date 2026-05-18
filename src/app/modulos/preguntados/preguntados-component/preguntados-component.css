@@ -1,0 +1,38 @@
+/* modulos/preguntados/preguntados.css */
+
+/* --- Animación para el spinner GIGANTE --- */
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* --- Asegurar que la imagen no se recorte en el contenedor mayor --- */
+.object-contain {
+    object-fit: contain !important;
+}
+
+.object-center {
+    object-position: center !important;
+}
+
+/* --- Nuevas escalas para sombras Arcade Gigantes --- */
+.shadow-\[8px_8px_0px_0px_rgba\(20\2c 83\2c 45\2c 1\)\] {
+    box-shadow: 8px 8px 0px 0px rgba(20, 83, 45, 1) !important;
+}
+
+.shadow-\[10px_10px_0px_0px_rgba\(20\2c 83\2c 45\2c 1\)\] {
+    box-shadow: 10px 10px 0px 0px rgba(20, 83, 45, 1) !important;
+}
+
+.shadow-\[12px_12px_0px_0px_rgba\(20\2c 83\2c 45\2c 1\)\] {
+    box-shadow: 12px 12px 0px 0px rgba(20, 83, 45, 1) !important;
+}
+
+/* --- Bordes más anchos --- */
+.border-b-16 {
+    border-bottom-width: 16px !important;
+}

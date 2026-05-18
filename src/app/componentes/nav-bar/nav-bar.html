@@ -12,21 +12,29 @@
 
     <!-- Links y Autenticación -->
     <div class="flex items-center gap-6 md:gap-10">
-        
-        <!-- Links Centrales -->
+                <!-- Links Centrales -->
         <div class="hidden md:flex items-center gap-8 border-r-2 border-gray-200 pr-8">
-        <a routerLink="/home" 
-            routerLinkActive="text-juego-primario border-b-2 border-juego-primario" 
-            [routerLinkActiveOptions]="{exact: true}"
-            class="text-juego-texto font-bold text-lg hover:text-juego-primario transition-all duration-300 py-1">
-            Juegos
-        </a>
+            
+            <a routerLink="/home" 
+                routerLinkActive="text-juego-primario border-b-2 border-juego-primario" 
+                [routerLinkActiveOptions]="{exact: true}"
+                class="text-juego-texto font-bold text-lg hover:text-juego-primario transition-all duration-300 py-1">
+                Juegos
+            </a>
 
-        <a routerLink="/quiensoy" 
-            routerLinkActive="bg-juego-primario text-white shadow-[4px_4px_0px_0px_rgba(20,83,45,1)] border-transparent"
-            class="text-juego-texto font-bold text-lg border-2 border-juego-primario px-6 py-2 rounded-xl hover:bg-juego-oscuro hover:text-white hover:border-juego-oscuro transition-all duration-300">
-            Quién Soy
-        </a>
+            <a routerLink="/chat" 
+                routerLinkActive="text-juego-primario border-b-2 border-juego-primario" 
+                [routerLinkActiveOptions]="{exact: true}"
+                class="text-juego-texto font-bold text-lg hover:text-juego-primario transition-all duration-300 py-1">
+                Chat
+            </a>
+
+            <a routerLink="/quiensoy" 
+                routerLinkActive="bg-juego-primario text-white shadow-[4px_4px_0px_0px_rgba(20,83,45,1)] border-transparent"
+                class="text-juego-texto font-bold text-lg border-2 border-juego-primario px-6 py-2 rounded-xl hover:bg-juego-oscuro hover:text-white hover:border-juego-oscuro transition-all duration-300">
+                Quién Soy
+            </a>
+
         </div>
 
         <!-- Lógica de Usuario -->
