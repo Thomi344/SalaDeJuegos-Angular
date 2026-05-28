@@ -82,7 +82,7 @@ export class Supabase {
         .select('*')
         .eq('juego', nombreJuego)
         .order('puntaje', { ascending: false }) // Ordena de Mejor a Peor
-        .limit(10); // Traemos solo el Top 10 para no saturar la pantalla
+        .limit(10); // Trae solo el Top 10 para no saturar la pantalla
 
         if (error) throw error;
         return data || [];

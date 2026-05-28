@@ -13,6 +13,9 @@ export class PreguntadosComponent implements OnInit {
 // --- Array local para guardar los 40 juegos descargados ---
   private juegosGuardados: any[] = [];
 
+// --- Array para llevar el registro de qué juegos ya salieron en la ronda actual ---
+  private juegosYaPreguntados: string[] = []; 
+
 // --- Signals para manejar la reactividad en tiempo real de la pantalla ---
   preguntaActual = signal<any>(null);
   opciones = signal<string[]>([]);
@@ -44,6 +47,9 @@ export class PreguntadosComponent implements OnInit {
     // --- Limpiamos los estados visuales del feedback al reiniciar ---
     this.opcionElegida.set('');
     this.mostrarFeedback.set(false);
+    
+    // ---  Vaciamos el registro de preguntas usadas al arrancar una nueva partida ---
+    this.juegosYaPreguntados = [];
 
     this.tiempoInicio = Date.now();
 
@@ -72,9 +78,16 @@ export class PreguntadosComponent implements OnInit {
     // --- Incrementa el contador de la pregunta actual con .update() ---
     this.numeroPregunta.update(n => n + 1);
 
-    // --- 1. Elije al azar el juego que va a ser la respuesta CORRECTA ---
-    const indiceCorrecto = Math.floor(Math.random() * this.juegosGuardados.length);
-    const juegoCorrecto = this.juegosGuardados[indiceCorrecto];
+    // --- Filtramos los juegos para descartar los que ya salieron en esta ronda ---
+    const juegosDisponibles = this.juegosGuardados.filter(juego => !this.juegosYaPreguntados.includes(juego.name));
+
+    // --- 1. Elije al azar el juego que va a ser la respuesta CORRECTA usando solo los disponibles ---
+    const indiceCorrecto = Math.floor(Math.random() * juegosDisponibles.length);
+    const juegoCorrecto = juegosDisponibles[indiceCorrecto];
+    
+    // --- Guarda el nombre del juego elegido para no volver a usarlo ---
+    this.juegosYaPreguntados.push(juegoCorrecto.name);
+
     this.preguntaActual.set(juegoCorrecto);
 
     // --- 2. Genera las respuestas INCORRECTAS filtrando para no repetir el nombre correcto ---

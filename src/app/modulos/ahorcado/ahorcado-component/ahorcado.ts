@@ -92,14 +92,14 @@ export class Ahorcado implements OnInit {
         // --- Puntaje: si gano, multiplica las vidas sobrantes por 10. Si perdió, es 0 ---
         const puntajeFinal = victoria ? (this.maxErrores - this.errores) * 10 : 0;
 
-        // --- Armamos el objeto con info extra para la estadistica ---
+        // --- objeto con info extra para la estadistica ---
         const detallesAhorcado = {
           errores_cometidos: this.errores,
           total_clicks: this.intentosTotales,
           palabra_asignada: this.palabraOculta
         };
 
-        // --- Guardamos en Supabase. ---
+        // --- Guarda en Supabase. ---
         await this.supabase.guardarResultadoJuego('Ahorcado', this.gano, puntajeFinal, tiempoFinal, detallesAhorcado);
         
         // --- Usamos ngZone y cdr para avisar que termino el juego ---

@@ -1,59 +1,49 @@
-# SalaDeJuegos
+# 🎮 Sala de Juegos - TP #1 Programación IV
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.8.
+![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
 
-## Development server
+[cite_start]**Materia:** Programación IV - 4° Cuatrimestre [cite: 1]  
+[cite_start]**Institución:** UTN Avellaneda - Tecnicatura Universitaria en Programación [cite: 2, 3]  
+**Deploy / Demo en vivo:** [Jugar Ahora en Firebase Hosting](https://tp1-sala-de-juegos-e8746.web.app/home)
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## 📖 Descripción del Proyecto
+[cite_start]La "Sala de juegos" es una aplicación web Frontend [cite: 6, 19] [cite_start]diseñada para que los usuarios registrados puedan medir sus capacidades cognitivas y motrices a través de una serie de minijuegos interactivos[cite: 8, 10]. 
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+[cite_start]El proyecto fue desarrollado bajo una arquitectura moderna utilizando las últimas características de **Angular (Standalone Components, Signals, Control Flow)**, estilado completamente con Tailwind CSS para lograr una interfaz "Arcade Gigante" responsiva y fluida, y respaldado por una base de datos para la persistencia de usuarios, mensajes y estadísticas[cite: 20, 21].
 
-## Code scaffolding
+## ✨ Características Principales
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+* 🔐 **Autenticación:** Sistema de Login y Registro. [cite_start]Acceso restringido solo a usuarios logueados[cite: 10, 21]. [cite_start]Cuenta con botones de acceso rápido para facilitar las pruebas del sistema[cite: 83].
+* [cite_start]💬 **Chat Global en Tiempo Real:** Sala de chat interactiva donde los usuarios conectados pueden intercambiar mensajes al instante sin necesidad de recargar la página[cite: 35, 36].
+* [cite_start]🏆 **Salón de la Fama (Resultados):** Un ranking dinámico que muestra el Top 10 de los mejores puntajes históricos para cada juego, consumiendo los datos de forma concurrente para maximizar el rendimiento[cite: 123, 125, 126].
+* [cite_start]👨‍💻 **Sección Quién Soy:** Perfil del desarrollador que consume datos dinámicos mediante la API pública de GitHub e incluye las reglas detalladas del juego de autoría propia[cite: 47, 50, 61].
+* [cite_start]🎨 **UX/UI Arcade:** Uso intensivo de CSS y animaciones para transiciones fluidas, feedback visual inmersivo (carteles de acierto/error), prohibición del uso de `alert()` reemplazándolos por modales personalizados[cite: 14, 15, 38, 44].
 
-```bash
-ng generate component component-name
-```
+## 🕹️ Los Juegos
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+[cite_start]La sala incluye 4 juegos con mecánicas y sistemas de puntuación únicos, guardando todos los datos estadísticos en la base de datos al finalizar cada partida[cite: 9, 12, 22]:
 
-```bash
-ng generate --help
-```
+1.  🔤 **Ahorcado:** El clásico juego de adivinar la palabra. [cite_start]Se premia la eficiencia otorgando un mayor puntaje a quienes resuelven el acertijo cometiendo la menor cantidad de errores posibles dentro de sus 6 intentos[cite: 23, 93, 94].
+2.  🃏 **Mayor o Menor:** Un desafío de probabilidad y supervivencia (muerte súbita). [cite_start]El usuario debe adivinar si la siguiente carta será mayor o menor[cite: 24, 98, 99]. El puntaje se basa en la "racha máxima" de aciertos consecutivos.
+3.  [cite_start]🧠 **Trivia Gamer (Preguntados):** Un cuestionario de 10 rondas que consume una API externa de videojuegos[cite: 25, 111, 114]. Sistema anti-repetición de preguntas y opciones múltiples dinámicas.
+4.  🎯 **Logo Quiz (Juego Propio):** Un reto visual tipo *Real vs. Fake*. [cite_start]El jugador comienza con 5 vidas y debe identificar el logo corporativo/gamer real entre tres opciones falsificadas[cite: 26, 119]. Otorga +20 puntos por cada acierto consecutivo.
 
-## Building
+## 🛠️ Tecnologías y Arquitectura
 
-To build the project run:
+* **Frontend:** Angular (TypeScript, HTML, CSS). [cite_start]Uso de Signals para manejo de estado sin lag[cite: 19].
+* **Estilos:** Tailwind CSS (diseño responsivo, Grid, Flexbox, UI/UX).
+* [cite_start]**Backend as a Service (BaaS):** Supabase / Firebase para Autenticación, Base de Datos PostgreSQL y Realtime[cite: 20].
+* **Hosting:** Firebase Hosting.
 
-```bash
-ng build
-```
+## 🚀 Instalación y Despliegue Local
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Para correr este proyecto en tu máquina local:
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. Clona este repositorio:
+   ```bash
+   git clone [https://github.com/tu-usuario/tu-repositorio.git](https://github.com/tu-usuario/tu-repositorio.git)
